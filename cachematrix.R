@@ -6,7 +6,8 @@
 ## See testcachematrix.R for tests.
 
 
-## The makeCacheMatrix function creates a matrix object that can cache its inverse.
+## The makeCacheMatrix function creates a matrix object that can cache its inverse. 
+## It takes one parameter (x), which is a matrix.
 
 makeCacheMatrix <- function(x = matrix()) {
   ## initialise the inverse matrix to NULL so that we can tell that inverse needs to be solved
@@ -35,9 +36,11 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## This function returns the inverse of the matrix created using the makeCacheMatrix function. 
-## If the inverse has already been stored and the matrix has not changed, then it will return
-## the cached version. Otherwise it will solve the inverse and cache it.
+## This function returns the inverse of the matrix created using the makeCacheMatrix function.
+## It takes one parameter (x), which is a matrix.If the inverse has already been stored 
+## and the matrix has not changed, then it will return the cached version. Otherwise 
+## it will solve the inverse and cache it.
+
 
 cacheSolve <- function(x) {                  
    inverse<- x$get_inverse()               
