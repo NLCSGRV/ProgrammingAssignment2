@@ -10,11 +10,14 @@
 ## It takes one parameter (x), which is a matrix.
 
 makeCacheMatrix <- function(x = matrix()) {
+  if (!is.matrix(x)) {
+    stop("This function takes a matrix as its only parameter!")
+    ## we could test if the matrix is invertible here, but it has been left out as it is computationally expensive.  
+  }
   ## initialise the inverse matrix to NULL so that we can tell that inverse needs to be solved
   inverse_matrix <- NULL   
   
   ## create a setter function to set the matrix x to a new matrix y. Set the inverse matrix to NULL to ensure new inverse will be solved
-
   set_matrix <- function(y) {
      inverse_matrix <<- NULL
      x <<- y   
@@ -42,13 +45,14 @@ makeCacheMatrix <- function(x = matrix()) {
 ## it will solve the inverse and cache it.
 
 
-cacheSolve <- function(x) {                  
+cacheSolve <- function(x,...) {                  
    inverse<- x$get_inverse()               
    if(!is.null(inverse)) {    
       message("Cached inverse found. Returning cached data.")
       return(inverse)
    }                                       
    message("No cached data found. Solving inverse.")
-   x$set_inverse(solve(x$get()))
+   original_matrix <- x$get()
+   x$set_inverse(solve(original_matrix,...))
    x$get_inverse()                        
 }
